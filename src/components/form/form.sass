@@ -1,0 +1,32 @@
+@import '../app/app'
+    
+.form
+    background-color: $white
+    width: 100%
+    padding: 45px
+    text-align-last: left
+    display: grid
+    grid-template-columns: 48% 48%
+    gap: 20px
+
+    &__about
+        margin-bottom: 15px
+
+    &__buttons
+        width: 100%
+        border-top: 1px solid $lightgrey
+        padding: 25px 30px 0 30px
+        display: flex;
+        justify-content: space-between;
+
+    &__forgot
+        cursor: pointer
+
+    p
+        grid-column: auto / span 2
+        text-align: center
+        min-height: 130px
+        
+.hobbit
+    display: inline-block
+    width: 10%
