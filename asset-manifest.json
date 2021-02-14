@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/neva-test/static/css/main.511f73c3.chunk.css",
+    "main.js": "/neva-test/static/js/main.b4dfcafc.chunk.js",
+    "main.js.map": "/neva-test/static/js/main.b4dfcafc.chunk.js.map",
+    "runtime-main.js": "/neva-test/static/js/runtime-main.6dcc332b.js",
+    "runtime-main.js.map": "/neva-test/static/js/runtime-main.6dcc332b.js.map",
+    "static/js/2.f66fdb82.chunk.js": "/neva-test/static/js/2.f66fdb82.chunk.js",
+    "static/js/2.f66fdb82.chunk.js.map": "/neva-test/static/js/2.f66fdb82.chunk.js.map",
+    "index.html": "/neva-test/index.html",
+    "static/css/main.511f73c3.chunk.css.map": "/neva-test/static/css/main.511f73c3.chunk.css.map",
+    "static/js/2.f66fdb82.chunk.js.LICENSE.txt": "/neva-test/static/js/2.f66fdb82.chunk.js.LICENSE.txt",
+    "static/media/button.sass": "/neva-test/static/media/arrow.b07832fd.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6dcc332b.js",
+    "static/js/2.f66fdb82.chunk.js",
+    "static/css/main.511f73c3.chunk.css",
+    "static/js/main.b4dfcafc.chunk.js"
+  ]
+}
