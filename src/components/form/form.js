@@ -166,7 +166,7 @@ const Form = () => {
 
     return (
       <div className="form">
-        <p>
+        <p className="form__info">
           Вы выбрали {+childTickets + +tickets} билетов по маршруту {direction} стоимостью {price}р.
           <br />
           Это путешествие займет у вас {direction === 'из A в B и обратно в А' ?
@@ -198,7 +198,7 @@ const Form = () => {
 
     return (
       <div className="form form--ready">
-        <h2>
+        <h2 className="form__heading">
           Заказ оформлен!
         </h2>
         <Button content="Готово"

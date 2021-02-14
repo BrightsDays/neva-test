@@ -7,7 +7,7 @@ const Button = ({ content, action, disabled, arrow }) => {
         <button className={ arrow ? 'button button--arrow' : 'button' } 
             onClick={ action } 
             disabled={ disabled }>
-            <span>{ content }</span>
+            { content }
         </button>
     )
 };

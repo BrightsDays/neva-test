@@ -1,25 +1,25 @@
 @import '../app/app'
 
 .button
-    cursor: pointer
+    display: flex
     padding: 16.5px 15px
+    min-width: 140px
+    font-size: 1.15em
+    font-weight: 600
     color: $white
     background: radial-gradient(5422.06% 1119.76% at 0% 288.54%, #3C8291 0%, #00B5AD 100%)
-    font-size: 15px
-    font-weight: 500
     border: none
     border-radius: 6px
     outline: none
-    display: flex
     align-items: center
     justify-content: center
-    min-width: 140px
+    cursor: pointer
 
     &--arrow::after
-        content: url('arrow.svg')
-        margin-left: 7px
         position: relative
         top: 2px
+        margin-left: 7px
+        content: url('arrow.svg')
 
     &:hover,&:focus
         background: linear-gradient(90.26deg, #00B5AD -75.74%, #5F3264 87.41%)
