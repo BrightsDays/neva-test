@@ -15,4 +15,4 @@ id  | event_id  | event_date          | ticket_price  | ticket_quantity  | type 
 2. Это зависит от возможности изменения структуры баркода, но лучше "отделить" штрихкоды билетов от штрихкодов заказов с помощью двух или трехзначных дополнительных номеров.
 
 ## Время из A в B
-Ссылка на страницу: [https://https://brightsdays.github.io/neva-test/index.html](https://https://brightsdays.github.io/neva-test/index.html)
+Ссылка на страницу: [https://https://brightsdays.github.io/neva-test/](https://https://brightsdays.github.io/neva-test/)
