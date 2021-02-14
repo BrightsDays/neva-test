@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Validate from '../calculate/validate.js';
+import Validate from '../helpers/validate.js';
 import './input.sass';
 
 const Input = ({ label, action, id, placeholder, disabled, value }) => {

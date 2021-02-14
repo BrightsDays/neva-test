@@ -8,6 +8,7 @@
     display: grid
     grid-template-columns: 48% 48%
     gap: 20px
+    min-height: 300px
 
     &__about
         margin-bottom: 15px
@@ -26,6 +27,18 @@
         grid-column: auto / span 2
         text-align: left
         min-height: 130px
+
+    &--ready
+        display: block
+        text-align: center
+
+        h2
+            display: block
+            width: 200px
+            margin: 30px auto 60px
+
+        button
+            margin: 0 auto
 
 @media screen and (max-width: 500px)
     .form

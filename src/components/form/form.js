@@ -3,9 +3,16 @@ import './form.sass';
 import Button from '../button';
 import Select from '../select';
 import Input from '../input';
-import calcTime from '../calculate/calcTime';
+import calcTime from '../helpers/calcTime';
 
 const Form = () => {
+  const ticketPrices = {
+    'adult': 700,
+    'adultDouble': 1200,
+    'child': 450,
+    'childDouble': 800,
+  };
+
   const [form, setForm] = useState('order');
   const [direction, setDirection] = useState('из A в B');
   const [timeThere, setTimeThere] = useState('900');
@@ -36,16 +43,15 @@ const Form = () => {
   const [backOptions, setBackOptions] = useState(backOptionsValue);
 
   useEffect(() => calcPrice(), [direction, tickets, childTickets]);
+  useEffect(() => disableOptions(), [timeThere, direction]);
 
   const calcPrice = () => {
     setPrice(
       direction === "из A в B и обратно в А" ?
-      (+childTickets + +tickets)*1200 :
-      (+childTickets + +tickets)*700
+      +childTickets*ticketPrices.childDouble + +tickets*ticketPrices.adultDouble :
+      +childTickets*ticketPrices.child + +tickets*ticketPrices.adult
     );
   };
-
-  useEffect(() => disableOptions(), [timeThere, direction]);
 
   const disableOptions = () => {
     for (let i in backOptionsValue) {
@@ -59,8 +65,28 @@ const Form = () => {
     }
   };
 
-  const onSubmit = () => {
-    console.log(direction,timeThere,timeBack);
+  const clickHandler = () => {
+    const timeThereOrder = calcTime(+timeThere);
+    const timeBackOrder = calcTime(+timeBack);
+
+    const order = [
+      {'tickets': {tickets},
+       'child-tickets': {childTickets},
+       'direction': {direction},
+       'time-there': {timeThereOrder},
+       'time-back': {timeBackOrder},      
+      }
+    ];
+  };
+
+  const ready = () => {
+    setForm('order');
+    setDirection('из A в B');
+    setTimeThere('900');
+    setTimeBack('960');
+    setTickets('0');
+    setChildTickets('0');
+    setPrice('');
   };
 
   if (form === 'order') {
@@ -84,23 +110,26 @@ const Form = () => {
                 action={e => {
                   setTimeThere(e.target.value);
                 }}
-                disabled={(direction === 'из A в B' || direction === 'из A в B и обратно в А') ? '' : true } />
+                disabled={(direction === 'из A в B' || direction === 'из A в B и обратно в А') ?
+                 '' : true } />
 
-        <Select label="Тип билета"
+        <div />
+        {/* <Select label="Тип билета"
                 id="ticketType"
                 options={[
                   {'option': 'Льготный', 'status': ''},
                   {'option': 'Групповой', 'status': ''},
                 ]}
-                disabled={true} />
+                disabled={true} /> */}
 
         <Select label="Время обратное"
                 id="timeBack"
                 options={ backOptions }
                 action={e => {
-                  setTimeBack(e.target.value.match(/^.{0,5}/i));
+                  setTimeBack(e.target.value);
                 }}
-                disabled={(direction === 'из B в A' || direction === 'из A в B и обратно в А') ? '' : true } />
+                disabled={(direction === 'из B в A' || direction === 'из A в B и обратно в А') ?
+                 '' : true } />
 
         <Input label="взрослых билетов" 
                id="adult"
@@ -117,7 +146,11 @@ const Form = () => {
                }} />
 
         <Button content="Посчитать"
-                disabled={ price === 0 ? true : '' }
+                disabled={ 
+                  (direction === 'из A в B и обратно в А' &&
+                  +timeThere + 50 >= +timeBack || 
+                  price === 0) ? true : '' 
+                }
                 action={e => {
                   e.preventDefault();
                   setForm('info');}
@@ -129,16 +162,21 @@ const Form = () => {
 
       </form>
     );
-  } else {
+  } else if (form === 'info') {
 
     return (
       <div className="form">
         <p>
-          Вы выбрали {+childTickets + +tickets} билетов по маршруту {direction} стоимостью {price}р.<br />
-          Это путешествие займет у вас {direction === 'из A в B и обратно в А' ? (100 + (+timeBack - (+timeThere + 50))) : 50} минут.<br />
-          Теплоход отправляется в {direction === 'из B в A' ? calcTime(+timeBack) : calcTime(+timeThere)},
-           а прибудет в {direction === 'из B в A' ? calcTime(+timeBack + 50) : calcTime(+timeThere + 50)}.<br />
-          {direction === 'из A в B и обратно в А' ? `Обратно поедем в ${calcTime(+timeBack)}, вернемся в ${calcTime(+timeBack + 50)}`  : ''}
+          Вы выбрали {+childTickets + +tickets} билетов по маршруту {direction} стоимостью {price}р.
+          <br />
+          Это путешествие займет у вас {direction === 'из A в B и обратно в А' ?
+          (100 + (+timeBack - (+timeThere + 50))) : 50} минут.<br />
+          Теплоход отправляется в {direction === 'из B в A' ?
+          calcTime(+timeBack) : calcTime(+timeThere)},
+          а прибудет в {direction === 'из B в A' ? 
+          calcTime(+timeBack + 50) : calcTime(+timeThere + 50)}.<br />
+          {direction === 'из A в B и обратно в А' ? 
+          `Обратно поедем в ${calcTime(+timeBack)}, вернемся в ${calcTime(+timeBack + 50)}` : ''}
         </p>
 
         <Button content="Изменить"
@@ -151,7 +189,22 @@ const Form = () => {
                 arrow=">"
                 action={e => {
                   e.preventDefault();
-                  onSubmit();}
+                  clickHandler();
+                  setForm('ready');}
+                } />
+      </div>
+    );
+  } else if (form === 'ready') {
+
+    return (
+      <div className="form form--ready">
+        <h2>
+          Заказ оформлен!
+        </h2>
+        <Button content="Готово"
+                action={e => {
+                  e.preventDefault();
+                  ready();}
                 } />
       </div>
     );
