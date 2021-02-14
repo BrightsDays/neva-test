@@ -6,7 +6,8 @@ import './app.sass';
 const App = () => {
   
   return (
-    <div className="form1">
+    <div className="order">
+      <h1 className="order__heading">Заказать билеты</h1>
       <Form />
     </div>
   );

@@ -24,9 +24,14 @@
 
     p
         grid-column: auto / span 2
-        text-align: center
+        text-align: left
         min-height: 130px
-        
-.hobbit
-    display: inline-block
-    width: 10%
+
+@media screen and (max-width: 500px)
+    .form
+        padding: 35px 15px 15px
+        grid-template-columns: 100%
+
+        p
+            grid-column: auto
+

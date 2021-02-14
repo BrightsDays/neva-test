@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './select.sass';
 
 const Select = ({ label, action, id, disabled, options }) => {
 
     const listOptions = options.map((index) =>
-        <option value={index} key={index}>{index}</option>
+        <option value={index.value} 
+                key={index.option}
+                disabled={index.status} >
+                    {index.option}
+        </option>
     );
 
     return (
